@@ -8,7 +8,8 @@ let mainWindow;
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     backgroundColor: '#303030',
-    width: 1000,
+    icon: './icon.png',
+    width: 800,
     height: 600,
     alwaysOnTop: true,
     webPreferences: {

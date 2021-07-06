@@ -1,3 +1,3 @@
 module.exports = {
-  url: 'https://www.google.com/',
+  url: 'https://to-timesheet.vercel.app',
 };
