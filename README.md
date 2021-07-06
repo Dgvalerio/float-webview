@@ -7,9 +7,9 @@ mkdir float-webview
 yarn init -y
 ```
 
-### Eslint e Prettier
+### Electron
 ```
-yarn add
+yarn add electron
 ```
 
 ### Para iniciar execute `yarn start`
