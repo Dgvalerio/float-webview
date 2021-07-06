@@ -1,43 +1,36 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, globalShortcut } = require('electron')
 const path = require('path')
+const config = require('./config');
 
-function createWindow () {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 800,
+let mainWindow;
+
+const createWindow = () => {
+  mainWindow = new BrowserWindow({
+    backgroundColor: '#303030',
+    width: 1000,
     height: 600,
+    alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
-  // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadURL(config.url)
+};
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
-}
+const toggleDevTools = () => mainWindow.webContents.toggleDevTools();
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Algumas APIs podem ser usadas somente depois que este evento ocorre.
+const createShortCuts = () => globalShortcut.register('CmdOrCtrl+J', toggleDevTools);
+
 app.whenReady().then(() => {
   createWindow()
 
-  app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-})
+}).then(() => createShortCuts());
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. Você também pode colocar eles em arquivos separados e requeridos-as aqui.
