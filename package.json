@@ -1,0 +1,14 @@
+{
+  "name": "float-webview",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/Dgvalerio/float-webview.git",
+  "author": "Davi Gonçalves Valério <al.davigvalerio@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^13.1.6"
+  }
+}
